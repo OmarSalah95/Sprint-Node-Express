@@ -29,7 +29,9 @@ projectsRouter.delete('/:id', (req, res) => {
     db.get(req.params.id)
       .then(project => {
         project
-          ?  db.remove(project.id).then(remCount => {res.status(200).json(`removed ${project}`, remCount)})
+          ?  db.remove(project.id)
+            .then(remCount => {res.status(200).json(`removed ${project}`, remCount)})
+            .catch(err => { res.status(404).json({ message: `Failed To delete that project  ${err} ` }) } )
           :  res.status(404).json({ message: `Failed To find that project  ${err} ` });
       })
       .catch(err => {
@@ -42,8 +44,25 @@ projectsRouter.post('/', (req, res) => {
     req.body.name && req.body.description
         ? db.insert(newProject)
             .then(dbPost => {res.status(201).json(dbPost)})
-            .catch(err => {res.status(400).json({ message: 'Failed to add Post' })})
+            .catch(err => {res.status(400).json({ message: `Failed to projects  ${err}` })})
         : res.status(500).json({Message: 'Please provide a name and description to the project.'});
 });
+// Updates a project in the DB and Returns the number 1 if Successful
+projectsRouter.put('/:id', (req, res) => {
+    const { name, description } = req.body;
 
+    db.get(req.params.id)
+        .then(project => {
+            project
+              ? name && description
+                    ?  db.update(req.params.id, req.body)
+                        .then(project => {res.status(200).json(project)})
+                        .catch(err =>{})
+                    : res.status(404).json({message: 'Please provide a project to update'})
+            : res.status(404).json({ message: "That project doesn't exist" });
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to update project' });
+        });
+});
 module.exports = projectsRouter
