@@ -27,13 +27,13 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 - [ ] Mention two parts of Express that you learned about this week.
 
 - [ ] Describe Middleware?
-
+    An application or test function applied to an API that has access to the homies (the req and res) as to execute some kind of logic prior to continuing to pass down the homies to the next middle ware before it reaches the API or SERVER sitting in the middle.
 - [ ] Describe a Resource?
-
+    All data used by the data base.
 - [ ] What can the API return to help clients know if a request was successful?
-
+     A status code, as well as error message, including the caught error
 - [ ] How can we partition our application into sub-applications?
-
+    By creating server side routing with the ability to apply such routes as middleware almost, similar to protected client side routing.
 ## Project Setup
 
 Follow these steps to set up and work on your project:
@@ -59,17 +59,17 @@ The `/data/helpers` folder includes files you can use to manage the persistence 
 
 **All these helper methods return a promise. Please you .then().catch() or async/await**
 
-- `get()`: calling get returns an array of all the resources contained in the database. If you pass an `id` to this method it will return the resource with that id if one is found.
-- `insert()`: calling insert passing it a resource object will add it to the database and return the newly created resource.
-- `update()`: accepts two arguments, the first is the `id` of the resource to update, and the second is an object with the `changes` to apply. It returns the updated resource. If a resource with the provided `id` is not found, the method returns `null`.
-- `remove()`: the remove method accepts an `id` as it's first parameter and, upon successfully deleting the resource from the database, returns the number of records deleted.
+- `get(x2)`: calling get returns an array of all the resources contained in the database. If you pass an `id` to this method it will return the resource with that id if one is found.
+- `insert(x1)`: calling insert passing it a resource object will add it to the database and return the newly created resource.
+- `update(x1)`: accepts two arguments, the first is the `id` of the resource to update, and the second is an object with the `changes` to apply. It returns the updated resource. If a resource with the provided `id` is not found, the method returns `null`.
+- `remove(x1)`: the remove method accepts an `id` as it's first parameter and, upon successfully deleting the resource from the database, returns the number of records deleted.
 
 The `projectModel.js` helper includes an extra method called `getProjectActions()` that takes a _project id_ as it's only argument and returns a list of all the _actions_ for the _project_.
 
 ## Minimum Viable Product
 
-- [ ] Configure an _npm script_ named _"server"_ that will execute your code using _nodemon_. Make _nodemon_ be a development time dependency only, it shouldn't be deployed to production.
-- [ ] Configure an _npm script_ named _"start"_ that will execute your code using _node_.
+- [x] Configure an _npm script_ named _"server"_ that will execute your code using _nodemon_. Make _nodemon_ be a development time dependency only, it shouldn't be deployed to production.
+- [x] Configure an _npm script_ named _"start"_ that will execute your code using _node_.
 
 Design and build the necessary endpoints to:
 
