@@ -1,6 +1,7 @@
 const actionsRouter = require('express').Router()
 const actionDb = require('../helpers/actionModel')
 const projectDb = require('../helpers/projectModel')
+
 // Returns an array of action objects upon get request.
 actionsRouter.get('/', (req, res) => {
     actionDb.get()
@@ -63,26 +64,4 @@ actionsRouter.put('/:id', (req, res) => {
         : res.status(500).json({message: `Please enter updates to either the action description or notes`})
 })
 
-
-
-
-
-
-// actionsRouter.put('/:id', (req, res) => {
-//     const { name, description } = req.body;
-
-//     actionDb.get(req.params.id)
-//         .then(action => {
-//             action
-//               ? name && description
-//                     ?  actionDb.update(req.params.id, req.body)
-//                         .then(action => {res.status(200).json(action)})
-//                         .catch(err =>{})
-//                     : res.status(404).json({message: 'Please provide a action to update'})
-//             : res.status(404).json({ message: "That action doesn't exist" });
-//         })
-//         .catch(err => {
-//             res.status(500).json({ message: 'Failed to update action' });
-//         });
-// });
 module.exports = actionsRouter

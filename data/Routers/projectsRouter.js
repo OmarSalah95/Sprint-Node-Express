@@ -17,13 +17,27 @@ projectsRouter.get('/:id', async (req, res) => {
         const project = await db.get(req.params.id)
         project
             ? res.status(200).json(project) 
-            : res.status(404).json({message: "Can NOT find user"})
+            : res.status(404).json({message: "Can NOT find project"})
         
     } catch(err) {
         console.log(err);
         res.status(500).json({ message: `Failed To Get projects  ${err} ` });
     }
 });
+// Return all Project actions
+projectsRouter.get('/:id/actions', async (req, res) => {
+    try{
+        const project = await db.get(req.params.id)
+        project
+            ? res.status(200).json(project.actions) 
+            : res.status(404).json({message: "Can NOT find project"})
+        
+    } catch(err) {
+        console.log(err);
+        res.status(500).json({ message: `Failed To Get projects  ${err} ` });
+    }
+});
+
 // Deletes a projects from the DB and returns count of deleted items
 projectsRouter.delete('/:id', (req, res) => {
     db.get(req.params.id)
