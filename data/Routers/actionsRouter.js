@@ -49,7 +49,25 @@ actionsRouter.post('/', (req, res) => {
             ).catch(err => {res.status(404).json({message: `${err}`})})
         : res.status(500).json({Message: 'Please provide a project id, description, and notes to the action.'})
 });
-// // Updates a action in the DB and Returns the number 1 if Successful
+// Updates a action in the DB and Returns the number 1 if Successful
+actionsRouter.put('/:id', (req, res) => {
+    const changedAction = {...req.body}
+    changedAction.description || changedAction.notes
+        ? actionDb.get(req.params.id)
+            .then(dbAction => {
+                actionDb.update(dbAction.id, changedAction)
+                    .then(dbUpdatedAction => res.status(200).json(dbUpdatedAction))
+                    .catch(err => res.status(500).json({message: `Failed to updated  ${err}`}))
+            })
+            .catch(err => res.status(404).json({message: `That action doesn't exist  ${err}`}))
+        : res.status(500).json({message: `Please enter updates to either the action description or notes`})
+})
+
+
+
+
+
+
 // actionsRouter.put('/:id', (req, res) => {
 //     const { name, description } = req.body;
 
